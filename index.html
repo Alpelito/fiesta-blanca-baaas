@@ -553,8 +553,8 @@ async function findGuest(cc){
 
 /* ---------- formatting ---------- */
 const dots = s => String(s).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-const withRank = (g, nm) => g === 'CIV' ? nm : g + ' ' + nm;
-const rankLine = (g, gn) => g === 'CIV' ? 'Personal civil' : g + ' · ' + gn;
+const withRank = (g, gn, nm) => g === 'CIV' ? nm : gn + ' ' + nm;
+const rankLine = (g, gn) => g === 'CIV' ? 'Personal civil' : gn;
 function transport(r){
   if (r.tb && r.tt) return 'Desde Bogotá y desde Tolemaida';
   if (r.tb) return 'Desde Bogotá';
@@ -571,7 +571,7 @@ function render(r){
   const w = $('g-with');
   w.hidden = true; w.textContent = '';
   if (isComp){
-    w.append('Como acompañante de ', Object.assign(document.createElement('b'), {textContent: withRank(r.host.g, r.host.nm)}));
+    w.append('Como acompañante de ', Object.assign(document.createElement('b'), {textContent: withRank(r.host.g, r.host.gn, r.host.nm)}));
     w.hidden = false;
   } else if (r.a){
     w.append('junto a ', Object.assign(document.createElement('b'), {textContent: r.a}));
@@ -583,9 +583,9 @@ function render(r){
   f.push(['Invitado', r.nm, 'wide']);
   if (isComp){
     f.push(['Cédula', dots(r.cc)]);
-    f.push(['Invitado(a) por', withRank(r.host.g, r.host.nm), 'full']);
+    f.push(['Invitado(a) por', withRank(r.host.g, r.host.gn, r.host.nm), 'full']);
   } else {
-    f.push(['Grado', r.g === 'CIV' ? 'Civil' : r.g + ' · ' + r.gn]);
+    f.push(['Grado', r.g === 'CIV' ? 'Civil' : r.gn]);
     f.push(['Cédula', dots(r.cc)]);
     if (r.a){
       f.push(['Acompañante', r.a, 'wide']);
@@ -606,8 +606,8 @@ function render(r){
   }
 
   const qr = $('qr'); qr.textContent = '';
-  const lines = ['FIESTA BLANCA BAAAS 2026', 'Invitacion ' + r.n, plain(isComp ? r.nm : withRank(r.g, r.nm)), 'CC ' + r.cc];
-  if (isComp) lines.push('Acompanante de ' + plain(withRank(r.host.g, r.host.nm)));
+  const lines = ['FIESTA BLANCA BAAAS 2026', 'Invitacion ' + r.n, plain(isComp ? r.nm : withRank(r.g, r.gn, r.nm)), 'CC ' + r.cc];
+  if (isComp) lines.push('Acompanante de ' + plain(withRank(r.host.g, r.host.gn, r.host.nm)));
   else if (r.a) lines.push('Acompanante: ' + plain(r.a));
   lines.push('27/11/2026 19:00 Valle de los Lanceros, Melgar');
   try {
@@ -615,7 +615,7 @@ function render(r){
     else qr.hidden = true;
   } catch(e){ qr.hidden = true; }
 
-  const det = 'Invitación ' + r.n + ' para ' + (isComp ? r.nm : withRank(r.g, r.nm)) + '.\nCódigo de vestuario: blanco.\nBatallón de Abastecimientos y Servicios para la Aviación.';
+  const det = 'Invitación ' + r.n + ' para ' + (isComp ? r.nm : withRank(r.g, r.gn, r.nm)) + '.\nCódigo de vestuario: blanco.\nBatallón de Abastecimientos y Servicios para la Aviación.';
   $('cal').href = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
     + '&text=' + encodeURIComponent('Fiesta Blanca BAAAS · Despedida de año')
     + '&dates=20261128T000000Z/20261128T050000Z&ctz=America/Bogota'
@@ -671,7 +671,7 @@ async function reveal(r){
   busy = true;
   $('gate').classList.add('opening');
   render(r);
-  $('r-name').textContent = r.r === 'a' ? r.nm : withRank(r.g, r.nm);
+  $('r-name').textContent = r.nm;
   input.blur();
   if (reduce){ show(); return; }
   form.classList.add('away');
