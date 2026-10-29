@@ -386,7 +386,7 @@ button,input{font:inherit}
         </div>
         <div class="ww-text">
           <div class="ww-row"><span class="k">Hora</span><span class="v">7:00 p.m. <small>(19:00 horas)</small></span></div>
-          <div class="ww-row"><span class="k">Lugar</span><span class="v">Valle de los Lanceros <small style="display:block">Melgar</small></span></div>
+          <div class="ww-row"><span class="k">Lugar</span><span class="v">Casa de Cristal <small style="display:block">Melgar, Tolima</small></span></div>
         </div>
       </div>
       <p class="count-note" id="count-note">Faltan</p>
@@ -401,7 +401,7 @@ button,input{font:inherit}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 9.5h17M8 3v4M16 3v4M12 12.5v5M9.5 15h5"/></svg>
           Agregar al calendario
         </a>
-        <a class="btn btn-line" href="https://www.google.com/maps/search/?api=1&amp;query=Valle%20de%20los%20Lanceros%2C%20Melgar" target="_blank" rel="noopener">
+        <a class="btn btn-line" href="https://www.google.com/maps/search/?api=1&amp;query=Casa%20de%20Cristal%2C%20Melgar%2C%20Tolima&amp;query_place_id=ChIJLZ73bgDfPo4R_t4imeRKE-c" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s-6.5-6.2-6.5-11.2a6.5 6.5 0 0 1 13 0C18.5 14.8 12 21 12 21z"/><circle cx="12" cy="9.8" r="2.4"/></svg>
           Cómo llegar
         </a>
@@ -422,13 +422,13 @@ button,input{font:inherit}
           <div class="route">
             <div><span class="code">BAAAS</span><span class="sub">Batallón</span></div>
             <div class="path"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 15.5v-2l-8-5V3.6c0-.9-.7-1.6-1.5-1.6S10 2.7 10 3.6v4.9l-8 5v2l8-2.5v5.4l-2 1.5V21l3.5-1 3.5 1v-1.6l-2-1.5V13l8 2.5z" transform="rotate(90 12 12)"/></svg></div>
-            <div class="end"><span class="code">MELGAR</span><span class="sub">Valle de los Lanceros</span></div>
+            <div class="end"><span class="code">MELGAR</span><span class="sub">Casa de Cristal</span></div>
           </div>
           <dl class="fields" id="fields"></dl>
           <div class="strip">
             <div><span>Fecha</span><b>Vie 27 nov 2026</b></div>
             <div><span>Hora</span><b>19:00</b></div>
-            <div><span>Lugar</span><b>Valle de los Lanceros, Melgar</b></div>
+            <div><span>Lugar</span><b>Casa de Cristal, Melgar, Tolima</b></div>
           </div>
         </div>
         <div class="p-stub">
@@ -609,7 +609,7 @@ function render(r){
   const lines = ['FIESTA BLANCA BAAAS 2026', 'Invitacion ' + r.n, plain(isComp ? r.nm : withRank(r.g, r.gn, r.nm)), 'CC ' + r.cc];
   if (isComp) lines.push('Acompanante de ' + plain(withRank(r.host.g, r.host.gn, r.host.nm)));
   else if (r.a) lines.push('Acompanante: ' + plain(r.a));
-  lines.push('27/11/2026 19:00 Valle de los Lanceros, Melgar');
+  lines.push('27/11/2026 19:00 Casa de Cristal, Melgar, Tolima');
   try {
     if (window.QRCode) new QRCode(qr, {text: lines.join('\n'), width: 232, height: 232, colorDark: '#2A2118', colorLight: '#FFFFFF', correctLevel: QRCode.CorrectLevel.M});
     else qr.hidden = true;
@@ -619,7 +619,7 @@ function render(r){
   $('cal').href = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
     + '&text=' + encodeURIComponent('Fiesta Blanca BAAAS · Despedida de año')
     + '&dates=20261128T000000Z/20261128T050000Z&ctz=America/Bogota'
-    + '&location=' + encodeURIComponent('Valle de los Lanceros, Melgar')
+    + '&location=' + encodeURIComponent('Casa de Cristal, Melgar, Tolima')
     + '&details=' + encodeURIComponent(det);
 }
 
